@@ -1,7 +1,9 @@
 import 'package:capstone/presentation/pages/article_page.dart';
 import 'package:capstone/presentation/pages/forum_page.dart';
 import 'package:capstone/presentation/pages/live_chat_page.dart';
+import 'package:capstone/presentation/provider/preferences_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -34,6 +36,12 @@ class _HomePageState extends State<HomePage> {
       label: ArticlePage.title,
     ),
   ];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   debugPrint('${Provider.of<PreferencesProvider>(context, listen: false).isLogin}');
+  // }
 
   @override
   Widget build(BuildContext context) {
