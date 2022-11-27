@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
       builder: (context, value, child) {
         return Scaffold(
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 28.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,11 +40,42 @@ class _LoginPageState extends State<LoginPage> {
                 Hero(
                   tag: 'Capstone C22-117',
                   child: Text(
-                    'Capstone C22-117',
-                    style: Theme.of(context).textTheme.headline3,
+                    'Hello Again!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24
+                    ),
+                    textAlign: TextAlign.center,
+
                   ),
                 ),
-                const SizedBox(height: 24.0),
+                const SizedBox(height: 8.0),
+                Hero(
+                  tag: 'welcome',
+                  child: Text(
+                    'Welcome back, you,ve been missed',
+                    style: TextStyle(
+                        fontSize: 20
+                    ),
+                    textAlign: TextAlign.center,
+
+                  ),
+                ),
+                const SizedBox(height: 25.0),
+                Hero(
+                    tag: 'image',
+                    child: Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(35),
+                      child: Image.asset(
+                        'assets/icon.png',
+                        width: 150,
+                        height: 150,
+                      ),
+                    ),
+                    )
+                ),
+                const SizedBox(height: 10.0),
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -70,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'Password',
                   ),
                 ),
-                const SizedBox(height: 24.0),
+                const SizedBox(height: 20.0),
                 MaterialButton(
                   color: Theme.of(context).primaryColor,
                   textTheme: ButtonTextTheme.primary,
@@ -106,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('Login'),
                 ),
                 TextButton(
-                  child: const Text('Does not have an account yet ? Signup here'),
+                  child: const Text('Want to try the app now ? Signup here'),
                   onPressed: () => Navigator.pushNamed(context, SignupPage.routeName),
                 ),
               ],

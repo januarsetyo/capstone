@@ -30,13 +30,30 @@ class _SignupPageState extends State<SignupPage> {
           children: [
             _isLoading ? const Center(child: CircularProgressIndicator()) : Container(),
             Hero(
-              tag: 'Capstone C22-117',
+              tag: 'Sign Up',
               child: Text(
-                'Capstone C22-117',
-                style: Theme.of(context).textTheme.headline3,
+                'Sign Up',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                    fontSize: 30
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 24.0),
+            const SizedBox(height: 12.0),
+            Hero(tag: 'image',
+                child: Container(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(35),
+                    child: Image.asset(
+                      'assets/icon.png',
+                      width: 150,
+                      height: 150,
+                    ),
+                  ),
+                )
+            ),
+            const SizedBox(height: 30.0),
             Text(
               'Create your account',
               style: Theme.of(context).textTheme.subtitle1,
