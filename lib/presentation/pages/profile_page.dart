@@ -30,11 +30,14 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(_auth.currentUser!.email.toString()),
+                Text(
+                    _auth.currentUser != null ? _auth.currentUser!.email.toString() : ''),
                 const SizedBox(
                   height: 10,
                 ),
-                Text('ID : ${_auth.currentUser!.uid}'),
+                Text(_auth.currentUser != null
+                    ? 'ID : ${_auth.currentUser!.uid}'
+                    : 'ID : ""'),
                 const SizedBox(
                   height: 20,
                 ),
