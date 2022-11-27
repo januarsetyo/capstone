@@ -1,3 +1,4 @@
+import 'package:capstone/presentation/pages/login_page.dart';
 import 'package:capstone/presentation/provider/preferences_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,20 @@ class ProfilePage extends StatelessWidget {
                   height: 10,
                 ),
                 Text('ID : ${_auth.currentUser!.uid}'),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  child: const Text('Logout'),
+                  onPressed: () async {
+                    final navigator = Navigator.of(context);
+
+                    await _auth.signOut();
+                    value.setIsLogin(false);
+
+                    navigator.pushReplacementNamed(LoginPage.routeName);
+                  },
+                ),
               ],
             ),
           ),
@@ -42,16 +57,3 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
-
-// ElevatedButton(
-//               child: const Text('Logout'),
-//               onPressed: () async {
-//                 final navigator = Navigator.of(context);
-
-//                 await _auth.signOut();
-//                 value.setIsLogin(false);
-
-//                 navigator.pushReplacementNamed(LoginPage.routeName);
-//               },
-//             ),
