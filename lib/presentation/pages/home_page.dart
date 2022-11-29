@@ -2,6 +2,7 @@ import 'package:capstone/presentation/pages/article_page.dart';
 import 'package:capstone/presentation/pages/forum_page.dart';
 import 'package:capstone/presentation/pages/live_chat_page.dart';
 import 'package:capstone/presentation/pages/profile_page.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,19 +25,28 @@ class _HomePageState extends State<HomePage> {
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = const [
     BottomNavigationBarItem(
-      icon: Icon(Icons.forum),
+      icon: Icon(Icons.forum, color: primaryColor),
       label: ForumPage.title,
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.message),
+      icon: Icon(
+        Icons.message,
+        color: primaryColor,
+      ),
       label: LiveChatPage.title,
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.public),
+      icon: Icon(
+        Icons.public,
+        color: primaryColor,
+      ),
       label: ArticlePage.title,
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person),
+      icon: Icon(
+        Icons.person,
+        color: primaryColor,
+      ),
       label: ProfilePage.title,
     ),
   ];
@@ -47,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       body: _listWidgets[_bottomNavIndex],
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.black,
         showUnselectedLabels: true,
         currentIndex: _bottomNavIndex,
         items: _bottomNavBarItems,
