@@ -1,6 +1,6 @@
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/signup_page.dart';
-import 'package:capstone/presentation/provider/preferences_provider.dart';
+import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PreferencesProvider>(
+    return Consumer<PreferencesNotifier>(
       builder: (context, value, child) {
         return Scaffold(
           body: Padding(

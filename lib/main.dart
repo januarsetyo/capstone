@@ -3,11 +3,12 @@ import 'package:capstone/firebase_options.dart';
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/login_page.dart';
 import 'package:capstone/presentation/pages/signup_page.dart';
-import 'package:capstone/presentation/provider/preferences_provider.dart';
+import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:capstone/presentation/provider/article_notifier.dart';
 import 'package:capstone/injection.dart' as di;
 
 Future<void> main() async {
@@ -46,14 +47,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => PreferencesProvider(
+          create: (_) => PreferencesNotifier(
             preferencesHelper: PreferencesHelper(
               sharedPreferences: SharedPreferences.getInstance(),
             ),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<ArticleNotifier>(),
         )
       ],
-      child: Consumer<PreferencesProvider>(
+      child: Consumer<PreferencesNotifier>(
         builder: (context, value, child) {
           return MaterialApp(
             title: 'Capstone Project',

@@ -1,10 +1,10 @@
 import 'package:capstone/data/datasources/preferences_helper.dart';
 import 'package:flutter/widgets.dart';
 
-class PreferencesProvider extends ChangeNotifier {
+class PreferencesNotifier extends ChangeNotifier {
   PreferencesHelper preferencesHelper;
 
-  PreferencesProvider({required this.preferencesHelper}) {
+  PreferencesNotifier({required this.preferencesHelper}) {
     _getIsLogin();
   }
 

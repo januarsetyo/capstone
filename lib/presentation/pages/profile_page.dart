@@ -1,5 +1,5 @@
 import 'package:capstone/presentation/pages/login_page.dart';
-import 'package:capstone/presentation/provider/preferences_provider.dart';
+import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PreferencesProvider>(
+    return Consumer<PreferencesNotifier>(
       builder: (context, value, child) {
         return Scaffold(
           body: Center(
