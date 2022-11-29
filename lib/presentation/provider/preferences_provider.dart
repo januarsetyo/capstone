@@ -1,4 +1,4 @@
-import 'package:capstone/data/preferences/preferences_helper.dart';
+import 'package:capstone/data/datasources/preferences_helper.dart';
 import 'package:flutter/widgets.dart';
 
 class PreferencesProvider extends ChangeNotifier {

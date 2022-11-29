@@ -24,15 +24,15 @@ class _HomePageState extends State<HomePage> {
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = const [
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: Icon(Icons.forum),
       label: ForumPage.title,
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: Icon(Icons.message),
       label: LiveChatPage.title,
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: Icon(Icons.public),
       label: ArticlePage.title,
     ),
     BottomNavigationBarItem(

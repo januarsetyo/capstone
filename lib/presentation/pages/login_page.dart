@@ -37,44 +37,36 @@ class _LoginPageState extends State<LoginPage> {
                 _isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : Container(),
-                Hero(
+                const Hero(
                   tag: 'Capstone C22-117',
                   child: Text(
                     'Hello Again!',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     textAlign: TextAlign.center,
-
                   ),
                 ),
                 const SizedBox(height: 8.0),
-                Hero(
+                const Hero(
                   tag: 'welcome',
                   child: Text(
                     'Welcome back, you,ve been missed',
-                    style: TextStyle(
-                        fontSize: 20
-                    ),
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
-
                   ),
                 ),
                 const SizedBox(height: 25.0),
                 Hero(
                     tag: 'image',
                     child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(35),
-                      child: Image.asset(
-                        'assets/icon.png',
-                        width: 150,
-                        height: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(35),
+                        child: Image.asset(
+                          'assets/icon.png',
+                          width: 150,
+                          height: 150,
+                        ),
                       ),
-                    ),
-                    )
-                ),
+                    )),
                 const SizedBox(height: 10.0),
                 TextField(
                   controller: _emailController,

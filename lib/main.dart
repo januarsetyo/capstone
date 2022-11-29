@@ -1,4 +1,4 @@
-import 'package:capstone/data/preferences/preferences_helper.dart';
+import 'package:capstone/data/datasources/preferences_helper.dart';
 import 'package:capstone/firebase_options.dart';
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/login_page.dart';
@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:capstone/injection.dart' as di;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,8 @@ Future<void> main() async {
   );
 
   debugPrint('${await preferencesHelper.isLogin}');
+
+  di.init();
 
   runApp(
     await preferencesHelper.isLogin

@@ -29,19 +29,17 @@ class _SignupPageState extends State<SignupPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _isLoading ? const Center(child: CircularProgressIndicator()) : Container(),
-            Hero(
+            const Hero(
               tag: 'Sign Up',
               child: Text(
                 'Sign Up',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                    fontSize: 30
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 12.0),
-            Hero(tag: 'image',
+            Hero(
+                tag: 'image',
                 child: Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(35),
@@ -51,8 +49,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 150,
                     ),
                   ),
-                )
-            ),
+                )),
             const SizedBox(height: 30.0),
             Text(
               'Create your account',
