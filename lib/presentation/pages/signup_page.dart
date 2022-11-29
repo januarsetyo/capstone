@@ -22,6 +22,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -39,7 +40,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             const SizedBox(height: 12.0),
             Hero(
-                tag: 'image',
+                tag: 'Image',
                 child: Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(35),
