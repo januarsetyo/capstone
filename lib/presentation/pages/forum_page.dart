@@ -1,25 +1,44 @@
+import 'package:capstone/presentation/pages/post_page.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
 import 'package:capstone/presentation/widgets/widgets.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:capstone/utils/enum_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ForumPage extends StatelessWidget {
+class ForumPage extends StatefulWidget {
   static const String title = 'Forum';
 
   const ForumPage({Key? key}) : super(key: key);
 
   @override
+  State<ForumPage> createState() => _ForumPageState();
+}
+
+class _ForumPageState extends State<ForumPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => Provider.of<PostNotifier>(context, listen: false).fetchPost());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 0,
-        actions: const [
-          Icon(
-            Icons.create,
-            color: Colors.lightBlue,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.create,
+              color: primaryColor,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, PostPage.routeName);
+            },
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           )
         ],

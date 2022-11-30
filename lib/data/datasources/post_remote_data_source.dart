@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 abstract class PostRemoteDataSource {
   Future<List<PostModel>> getPost();
+  Future<String> createPost(String username, String description);
 }
 
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
@@ -21,6 +22,21 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     if (response.statusCode == 200) {
       return List<PostModel>.from(
           json.decode(response.body).map((x) => PostModel.fromJson(x)));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<String> createPost(String username, String description) async {
+    final response = await client.post(
+      Uri.parse('$baseUrl/post'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(<String, dynamic>{"name": username, "description": description}),
+    );
+
+    if (response.statusCode == 201) {
+      return json.decode(response.body);
     } else {
       throw ServerException();
     }

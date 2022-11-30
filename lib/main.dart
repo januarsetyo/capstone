@@ -2,6 +2,7 @@ import 'package:capstone/data/datasources/preferences_helper.dart';
 import 'package:capstone/firebase_options.dart';
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/login_page.dart';
+import 'package:capstone/presentation/pages/post_page.dart';
 import 'package:capstone/presentation/pages/signup_page.dart';
 import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
               HomePage.routeName: (context) => const HomePage(),
               LoginPage.routeName: (context) => const LoginPage(),
               SignupPage.routeName: (context) => const SignupPage(),
+              PostPage.routeName: (context) => const PostPage(),
             },
           );
         },
