@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:capstone/data/models/article_model.dart';
 import 'package:capstone/data/models/article_response.dart';
 import 'package:capstone/utils/exception.dart';
+import 'package:capstone/utils/constants.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -11,8 +12,6 @@ abstract class ArticleRemoteDataSource {
 }
 
 class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
-  static const baseUrl = 'https://2f73-114-124-131-84.ap.ngrok.io';
-
   final http.Client client;
 
   ArticleRemoteDataSourceImpl({required this.client});

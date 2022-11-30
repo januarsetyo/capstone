@@ -4,6 +4,7 @@ import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/login_page.dart';
 import 'package:capstone/presentation/pages/signup_page.dart';
 import 'package:capstone/presentation/provider/preferences_notifier.dart';
+import 'package:capstone/presentation/provider/post_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<ArticleNotifier>(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<PostNotifier>(),
+        ),
       ],
       child: Consumer<PreferencesNotifier>(
         builder: (context, value, child) {

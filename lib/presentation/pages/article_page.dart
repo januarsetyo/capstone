@@ -1,5 +1,5 @@
 import 'package:capstone/presentation/provider/article_notifier.dart';
-import 'package:capstone/presentation/widgets.dart';
+import 'package:capstone/presentation/widgets/widgets.dart';
 import 'package:capstone/utils/enum_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
