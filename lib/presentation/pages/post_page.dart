@@ -46,7 +46,14 @@ class _PostPageState extends State<PostPage> {
                     minLines: 10,
                     maxLines: 15,
                     decoration: const InputDecoration(
-                      border: OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          borderSide: BorderSide(
+                            color: primaryColor,
+                          )),
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),
@@ -58,7 +65,6 @@ class _PostPageState extends State<PostPage> {
                     height: 10,
                   ),
                   ElevatedButton(
-                    child: const Text('POST'),
                     onPressed: () async {
                       await Provider.of<PostNotifier>(context, listen: false)
                           .fetchCreatePost(
@@ -77,12 +83,14 @@ class _PostPageState extends State<PostPage> {
                             Text(result.postMessage),
                             TextButton(
                               child: const Text(
-                                'Post Successful',
+                                'Back to Forum',
                                 style: TextStyle(color: primaryColor),
                               ),
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
-                                    context, HomePage.routeName);
+                                  context,
+                                  HomePage.routeName,
+                                );
                               },
                             )
                           ],
@@ -90,7 +98,11 @@ class _PostPageState extends State<PostPage> {
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
-                  )
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                    ),
+                    child: const Text('POST'),
+                  ),
                 ],
               ),
             ),

@@ -44,7 +44,12 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     final response = await client.post(
       Uri.parse('$baseUrl/post'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(<String, dynamic>{"name": username, "description": description}),
+      body: jsonEncode(
+        <String, dynamic>{
+          "name": username,
+          "description": description,
+        },
+      ),
     );
 
     if (response.statusCode == 201) {

@@ -7,6 +7,7 @@ import 'package:capstone/data/repositories/post_repository_impl.dart';
 import 'package:capstone/domain/repositories/article_repository.dart';
 import 'package:capstone/domain/repositories/comments_repository.dart';
 import 'package:capstone/domain/repositories/post_repository.dart';
+import 'package:capstone/domain/usecases/create_comments.dart';
 import 'package:capstone/domain/usecases/create_post.dart';
 import 'package:capstone/domain/usecases/get_article.dart';
 import 'package:capstone/domain/usecases/get_comments_by_id.dart';
@@ -37,6 +38,7 @@ void init() {
   locator.registerFactory(
     () => CommentsNotifier(
       locator(),
+      locator(),
     ),
   );
 
@@ -46,6 +48,7 @@ void init() {
   locator.registerLazySingleton(() => GetPostById(locator()));
   locator.registerLazySingleton(() => CreatePost(locator()));
   locator.registerLazySingleton(() => GetCommentsById(locator()));
+  locator.registerLazySingleton(() => CreateComments(locator()));
 
   // repository
   locator.registerLazySingleton<ArticleRespository>(
