@@ -2,10 +2,12 @@ import 'package:capstone/data/datasources/preferences_helper.dart';
 import 'package:capstone/firebase_options.dart';
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/login_page.dart';
+import 'package:capstone/presentation/pages/post_detail_page.dart';
 import 'package:capstone/presentation/pages/post_page.dart';
 import 'package:capstone/presentation/pages/signup_page.dart';
 import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
+import 'package:capstone/presentation/provider/comments_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,6 +63,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<PostNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<CommentsNotifier>(),
+        ),
       ],
       child: Consumer<PreferencesNotifier>(
         builder: (context, value, child) {
@@ -75,6 +80,9 @@ class MyApp extends StatelessWidget {
               LoginPage.routeName: (context) => const LoginPage(),
               SignupPage.routeName: (context) => const SignupPage(),
               PostPage.routeName: (context) => const PostPage(),
+              PostDetailPage.routeName: (context) => PostDetailPage(
+                    ModalRoute.of(context)?.settings.arguments as int,
+                  ),
             },
           );
         },

@@ -22,6 +22,17 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
+  Future<Either<Failure, Post>> getPostById(int id) async {
+    try {
+      final result = await remoteDataSource.getPostById(id);
+
+      return Right(result.toEntity());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    }
+  }
+
+  @override
   Future<Either<Failure, String>> createPost(String username, String description) async {
     try {
       final result = await remoteDataSource.createPost(username, description);

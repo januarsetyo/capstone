@@ -1,5 +1,4 @@
 const { Post } = require('../models/PostModel');
-const { Comments } = require('../models/CommentModel');
 
 const getPost = async (req, res) => {
   try {

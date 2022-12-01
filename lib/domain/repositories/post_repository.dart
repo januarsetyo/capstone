@@ -4,5 +4,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class PostRepository {
   Future<Either<Failure, List<Post>>> getPost();
+  Future<Either<Failure, Post>> getPostById(int id);
   Future<Either<Failure, String>> createPost(String username, String description);
 }
