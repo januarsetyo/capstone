@@ -1,4 +1,3 @@
-import 'package:capstone/presentation/pages/forum_page.dart';
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
 import 'package:capstone/styles/styles.dart';
@@ -39,26 +38,28 @@ class _PostPageState extends State<PostPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextField(
-                    controller: _descriptionController,
-                    textInputAction: TextInputAction.newline,
-                    keyboardType: TextInputType.multiline,
-                    minLines: 10,
-                    maxLines: 15,
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
+                  Flexible(
+                    child: TextField(
+                      controller: _descriptionController,
+                      textInputAction: TextInputAction.newline,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 10,
+                      maxLines: 15,
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            borderSide: BorderSide(
+                              color: primaryColor,
+                            )),
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          borderSide: BorderSide(
-                            color: primaryColor,
-                          )),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
                         ),
+                        hintText: 'Share your story here . . .',
                       ),
-                      hintText: 'Share your story here . . .',
                     ),
                   ),
                   const SizedBox(
@@ -77,25 +78,19 @@ class _PostPageState extends State<PostPage> {
                       );
 
                       final snackBar = SnackBar(
-                        content: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(result.postMessage),
-                            TextButton(
-                              child: const Text(
-                                'Back to Forum',
-                                style: TextStyle(color: primaryColor),
-                              ),
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  HomePage.routeName,
-                                );
-                              },
-                            )
-                          ],
+                        content: Text(result.postMessage),
+                        action: SnackBarAction(
+                          label: 'Back To Home',
+                          textColor: secondaryColor,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              HomePage.routeName,
+                            );
+                          },
                         ),
                       );
+
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     style: ElevatedButton.styleFrom(

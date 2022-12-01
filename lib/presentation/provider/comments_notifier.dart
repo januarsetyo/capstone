@@ -1,5 +1,3 @@
-import 'package:capstone/data/datasources/comments_remote_data_source.dart';
-import 'package:capstone/domain/entities/article.dart';
 import 'package:capstone/domain/entities/comments.dart';
 import 'package:capstone/domain/usecases/create_comments.dart';
 import 'package:capstone/domain/usecases/get_comments_by_id.dart';

@@ -19,8 +19,7 @@ class _ForumPageState extends State<ForumPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<PostNotifier>(context, listen: false).fetchPost());
+    Future.microtask(() => Provider.of<PostNotifier>(context, listen: false).fetchPost());
   }
 
   @override
@@ -56,9 +55,10 @@ class _ForumPageState extends State<ForumPage> {
             return ListView.builder(
               itemCount: result.post.length,
               itemBuilder: (context, index) {
-                var post = result.post[index];
+                var post = result.post.reversed.toList();
+                var postReversed = post[index];
 
-                return forumCard(context, post);
+                return forumCard(context, postReversed);
               },
             );
           } else if (result.state == RequestState.error) {

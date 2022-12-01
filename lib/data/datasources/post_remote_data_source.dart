@@ -9,6 +9,7 @@ abstract class PostRemoteDataSource {
   Future<List<PostModel>> getPost();
   Future<PostModel> getPostById(int id);
   Future<String> createPost(String username, String description);
+  Future<String> deletePostById(int id);
 }
 
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
@@ -53,6 +54,17 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     );
 
     if (response.statusCode == 201) {
+      return json.decode(response.body);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<String> deletePostById(int id) async {
+    final response = await client.delete(Uri.parse('$baseUrl/post/$id'));
+
+    if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
       throw ServerException();

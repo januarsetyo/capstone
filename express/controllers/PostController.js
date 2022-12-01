@@ -48,7 +48,7 @@ const updatePost = async (req, res) => {
   }
 };
 
-const deletePost = async (req, res) => {
+const deletePostById = async (req, res) => {
   try {
     await Post.destroy({
       where: {
@@ -62,4 +62,4 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { getPost, createPost, getPostById, updatePost, deletePost };
+module.exports = { getPost, createPost, getPostById, updatePost, deletePostById };
