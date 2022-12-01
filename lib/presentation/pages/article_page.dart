@@ -1,5 +1,6 @@
 import 'package:capstone/presentation/provider/article_notifier.dart';
 import 'package:capstone/presentation/widgets/widgets.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:capstone/utils/enum_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,9 @@ class ArticlePage extends StatelessWidget {
         builder: (context, result, child) {
           if (result.state == RequestState.loading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: secondaryColor,
+              ),
             );
           } else if (result.state == RequestState.loaded) {
             return ListView.builder(

@@ -1,6 +1,7 @@
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/signup_page.dart';
 import 'package:capstone/presentation/provider/preferences_notifier.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,10 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: secondaryColor,
+                      ))
                     : Container(),
                 const Text(
                   'Hello Again!',
@@ -81,7 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
-                      icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                      icon: Icon(_obscureText
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                       onPressed: () {
                         setState(() {
                           _obscureText = !_obscureText;
@@ -128,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                   child: const Text('Want to try the app now ? Signup here'),
-                  onPressed: () => Navigator.pushNamed(context, SignupPage.routeName),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, SignupPage.routeName),
                 ),
               ],
             ),

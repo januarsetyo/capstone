@@ -19,7 +19,8 @@ class _ForumPageState extends State<ForumPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<PostNotifier>(context, listen: false).fetchPost());
+    Future.microtask(
+        () => Provider.of<PostNotifier>(context, listen: false).fetchPost());
   }
 
   @override
@@ -47,7 +48,9 @@ class _ForumPageState extends State<ForumPage> {
         builder: (context, result, child) {
           if (result.state == RequestState.loading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: secondaryColor,
+              ),
             );
           } else if (result.state == RequestState.loaded) {
             return ListView.builder(
