@@ -25,27 +25,27 @@ class _HomePageState extends State<HomePage> {
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = const [
     BottomNavigationBarItem(
-      icon: Icon(Icons.forum, color: primaryColor),
+      icon: Icon(Icons.forum, color: secondaryColor),
       label: ForumPage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.message,
-        color: primaryColor,
+        color: secondaryColor,
       ),
       label: LiveChatPage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.public,
-        color: primaryColor,
+        color: secondaryColor,
       ),
       label: ArticlePage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.person,
-        color: primaryColor,
+        color: secondaryColor,
       ),
       label: ProfilePage.title,
     ),

@@ -3,6 +3,7 @@ import 'package:capstone/domain/entities/comments.dart';
 import 'package:capstone/domain/entities/post.dart';
 import 'package:capstone/presentation/pages/post_detail_page.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +26,10 @@ Widget forumCard(BuildContext context, Post post) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
-          color: Colors.white70,
+          color: Colors.lightBlue[100],
           child: InkWell(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(13, 0, 0, 13),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +39,7 @@ Widget forumCard(BuildContext context, Post post) {
                     children: [
                       Text(
                         post.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       IconButton(
                         icon: const Icon(Icons.more_horiz),
@@ -51,8 +52,8 @@ Widget forumCard(BuildContext context, Post post) {
                                   'WARNING !',
                                   style: TextStyle(color: Colors.redAccent),
                                 ),
-                                content:
-                                    const Text('Are you sure want to delete this post ?'),
+                                content: const Text(
+                                    'Are you sure want to delete this post ?'),
                                 actions: [
                                   TextButton(
                                     child: const Text(
@@ -76,7 +77,8 @@ Widget forumCard(BuildContext context, Post post) {
                                                   Expanded(
                                                     child: Text(
                                                       'Can\'t delete other people post',
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                     ),
                                                   ),
                                                 ],
@@ -128,14 +130,13 @@ Widget forumCard(BuildContext context, Post post) {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(post.createdAt),
+                  Text(post.createdAt,
+                      style: Theme.of(context).textTheme.overline),
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(post.description),
+                  Text(post.description,
+                      style: Theme.of(context).textTheme.subtitle2),
                 ],
               ),
             ),
@@ -155,7 +156,7 @@ Widget forumCard(BuildContext context, Post post) {
 
 Widget postDetailCard(BuildContext context, Post post) {
   return Card(
-    color: Colors.white70,
+    color: Colors.lightBlue[100],
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -164,16 +165,22 @@ Widget postDetailCard(BuildContext context, Post post) {
         children: [
           Text(
             post.name,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(
             height: 5,
           ),
-          Text(post.createdAt),
+          Text(
+            post.createdAt,
+            style: Theme.of(context).textTheme.overline,
+          ),
           const SizedBox(
             height: 15,
           ),
-          Text(post.description),
+          Text(
+            post.description,
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
         ],
       ),
     ),
@@ -182,7 +189,7 @@ Widget postDetailCard(BuildContext context, Post post) {
 
 Widget commentsCard(BuildContext context, Comments comments) {
   return Card(
-    color: Colors.white70,
+    color: Colors.lightBlue[100],
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -191,16 +198,16 @@ Widget commentsCard(BuildContext context, Comments comments) {
         children: [
           Text(
             comments.name,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(
             height: 5,
           ),
-          Text(comments.createdAt),
+          Text(comments.createdAt, style: Theme.of(context).textTheme.overline),
           const SizedBox(
             height: 15,
           ),
-          Text(comments.comments),
+          Text(comments.comments, style: Theme.of(context).textTheme.subtitle2),
         ],
       ),
     ),

@@ -96,7 +96,8 @@ class _PostPageState extends State<PostPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                     ),
-                    child: const Text('POST'),
+                    child:
+                        Text('POST', style: Theme.of(context).textTheme.button),
                   ),
                 ],
               ),

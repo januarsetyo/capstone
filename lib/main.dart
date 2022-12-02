@@ -9,6 +9,7 @@ import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
 import 'package:capstone/presentation/provider/comments_notifier.dart';
 import 'package:capstone/presentation/provider/user_notifier.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,9 +76,7 @@ class MyApp extends StatelessWidget {
         builder: (context, value, child) {
           return MaterialApp(
             title: 'Capstone Project',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
+            theme: ThemeData(textTheme: myTextTheme),
             initialRoute: pageRouteName,
             routes: {
               HomePage.routeName: (context) => const HomePage(),

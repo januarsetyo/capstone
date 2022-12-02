@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primaryColor = Color.fromRGBO(51, 148, 212, 1.0);
 const Color secondaryColor = Color.fromRGBO(129, 188, 228, 1.0);
 
-final textTheme = TextTheme(
+final myTextTheme = TextTheme(
   headline1: GoogleFonts.ubuntu(
       fontSize: 98, fontWeight: FontWeight.w300, letterSpacing: -1.5),
   headline2: GoogleFonts.ubuntu(
@@ -18,15 +18,18 @@ final textTheme = TextTheme(
   subtitle1: GoogleFonts.ubuntu(
       fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.15),
   subtitle2: GoogleFonts.ubuntu(
-      fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+      fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.1),
   bodyText1: GoogleFonts.ubuntu(
-      fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5),
+      fontSize: 16, fontWeight: FontWeight.w500, letterSpacing: 0.5),
   bodyText2: GoogleFonts.ubuntu(
       fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.25),
   button: GoogleFonts.ubuntu(
-      fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 1.25),
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.25,
+      color: Colors.white),
   caption: GoogleFonts.ubuntu(
       fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.4),
   overline: GoogleFonts.ubuntu(
-      fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
+      fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
