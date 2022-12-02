@@ -8,6 +8,7 @@ import 'package:capstone/presentation/pages/signup_page.dart';
 import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
 import 'package:capstone/presentation/provider/comments_notifier.dart';
+import 'package:capstone/presentation/provider/user_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,6 +66,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<CommentsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<UserNotifier>(),
         ),
       ],
       child: Consumer<PreferencesNotifier>(

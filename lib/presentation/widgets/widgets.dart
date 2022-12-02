@@ -61,6 +61,8 @@ Widget forumCard(BuildContext context, Post post) {
                                     ),
                                     onPressed: () async {
                                       if (post.name != currentUsername) {
+                                        Navigator.pop(context);
+
                                         return showDialog(
                                           context: context,
                                           builder: (context) {
@@ -83,7 +85,6 @@ Widget forumCard(BuildContext context, Post post) {
                                                 TextButton(
                                                   child: const Text('Back'),
                                                   onPressed: () {
-                                                    Navigator.pop(context);
                                                     Navigator.pop(context);
                                                   },
                                                 )

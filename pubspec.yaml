@@ -34,12 +34,14 @@ dependencies:
   equatable: ^2.0.5
   firebase_auth: ^4.1.4
   firebase_core: ^2.3.0
+  firebase_storage: ^11.0.6
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   get_it: ^7.2.0
   google_fonts: ^3.0.1
   http: ^0.13.5
+  image_picker: ^0.8.6
   provider: ^6.0.4
   shared_preferences: ^2.0.15
 
@@ -49,7 +51,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 flutter_native_splash:
-  color: "#FFFFFF"
+  color: '#FFFFFF'
   image: assets/logo.png
   android: true
   ios: true
