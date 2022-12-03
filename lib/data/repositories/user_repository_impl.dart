@@ -35,4 +35,15 @@ class UserRepositoryImpl implements UserRepository {
       return Left(ServerFailure(''));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> deleteProfilePictureById(String userId) async {
+    try {
+      final result = await remoteDataSource.deleteProfilePictureById(userId);
+
+      return Right(result);
+    } on ServerException {
+      return Left(ServerFailure(''));
+    }
+  }
 }

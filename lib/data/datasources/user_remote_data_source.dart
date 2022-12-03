@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 abstract class UserRemoteDataSource {
   Future<String> createProfilePicture(String userId, String imageUrl);
   Future<dynamic> getProfilePictureById(String userId);
+  Future<String> deleteProfilePictureById(String userId);
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -45,6 +46,17 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       } else {
         return UserModel.fromJson(json.decode(response.body));
       }
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<String> deleteProfilePictureById(String userId) async {
+    final response = await client.delete(Uri.parse('$baseUrl/user/$userId'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
     } else {
       throw ServerException();
     }

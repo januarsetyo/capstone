@@ -6,4 +6,5 @@ import 'package:dartz/dartz.dart';
 abstract class UserRepository {
   Future<Either<Failure, String>> createProfilePicture(String userId, String imageUrl);
   Future<Either<Failure, dynamic>> getProfilePictureById(String userId);
+  Future<Either<Failure, String>> deleteProfilePictureById(String userId);
 }

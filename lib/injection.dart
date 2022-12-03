@@ -14,6 +14,7 @@ import 'package:capstone/domain/usecases/create_comments.dart';
 import 'package:capstone/domain/usecases/create_post.dart';
 import 'package:capstone/domain/usecases/create_profile_picture.dart';
 import 'package:capstone/domain/usecases/delete_post_by_id.dart';
+import 'package:capstone/domain/usecases/delete_profile_picture_by_id.dart';
 import 'package:capstone/domain/usecases/get_article.dart';
 import 'package:capstone/domain/usecases/get_comments_by_id.dart';
 import 'package:capstone/domain/usecases/get_post.dart';
@@ -53,6 +54,7 @@ void init() {
     () => UserNotifier(
       locator(),
       locator(),
+      locator(),
     ),
   );
 
@@ -66,6 +68,7 @@ void init() {
   locator.registerLazySingleton(() => DeletePostById(locator()));
   locator.registerLazySingleton(() => CreateProfilePicture(locator()));
   locator.registerLazySingleton(() => GetProfilePictureById(locator()));
+  locator.registerLazySingleton(() => DeleteProfilePictureById(locator()));
 
   // repository
   locator.registerLazySingleton<ArticleRespository>(

@@ -1,4 +1,3 @@
-const { response } = require('express');
 const { User } = require('../models/UserModel');
 
 const createProfilePicture = async (req, res) => {
@@ -14,16 +13,31 @@ const createProfilePicture = async (req, res) => {
 const getProfilePicture = async (req, res) => {
   try {
     const response = await User.findOne({
+      limit: 1,
+      where: {
+        userId: req.params.userId,
+      },
+      order: [['createdAt', 'DESC']],
+    });
+
+    res.status(200).json(response);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const deleteProfilePictureById = async (req, res) => {
+  try {
+    await User.destroy({
       where: {
         userId: req.params.userId,
       },
     });
 
-    res.status(200).json(response);
+    res.status(200).json('Profile Picture Has Been Deleted !');
   } catch (err) {
-    res.status(404);
     console.log(err.message);
   }
 };
 
-module.exports = { createProfilePicture, getProfilePicture };
+module.exports = { createProfilePicture, getProfilePicture, deleteProfilePictureById };
