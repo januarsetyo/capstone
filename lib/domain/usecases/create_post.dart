@@ -7,7 +7,11 @@ class CreatePost {
 
   CreatePost(this.repository);
 
-  Future<Either<Failure, String>> execute(String username, String description) {
-    return repository.createPost(username, description);
+  Future<Either<Failure, String>> execute(
+    String username,
+    String description,
+    String imageUrl,
+  ) {
+    return repository.createPost(username, description, imageUrl);
   }
 }

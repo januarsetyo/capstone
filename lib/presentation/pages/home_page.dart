@@ -25,27 +25,30 @@ class _HomePageState extends State<HomePage> {
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = const [
     BottomNavigationBarItem(
-      icon: Icon(Icons.forum, color: secondaryColor),
+      icon: Icon(
+        Icons.forum,
+        color: primaryColor,
+      ),
       label: ForumPage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.message,
-        color: secondaryColor,
+        color: primaryColor,
       ),
       label: LiveChatPage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.public,
-        color: secondaryColor,
+        color: primaryColor,
       ),
       label: ArticlePage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.person,
-        color: secondaryColor,
+        color: primaryColor,
       ),
       label: ProfilePage.title,
     ),
@@ -54,7 +57,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _listWidgets[_bottomNavIndex],
+      body: SafeArea(
+        child: _listWidgets[_bottomNavIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.black,

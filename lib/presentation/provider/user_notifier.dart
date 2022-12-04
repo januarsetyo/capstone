@@ -54,7 +54,6 @@ class UserNotifier extends ChangeNotifier {
       _message = failure.message;
       _state = RequestState.error;
     }, (data) {
-      if (data is List<User>) {}
       _userById = data;
       _state = RequestState.loaded;
       notifyListeners();

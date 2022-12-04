@@ -25,24 +25,6 @@ class _ForumPageState extends State<ForumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.create,
-              color: primaryColor,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, PostPage.routeName);
-            },
-          ),
-          const SizedBox(
-            width: 15,
-          )
-        ],
-      ),
       body: Consumer<PostNotifier>(
         builder: (context, result, child) {
           if (result.state == RequestState.loading) {
@@ -52,14 +34,17 @@ class _ForumPageState extends State<ForumPage> {
               ),
             );
           } else if (result.state == RequestState.loaded) {
-            return ListView.builder(
-              itemCount: result.post.length,
-              itemBuilder: (context, index) {
-                var post = result.post.reversed.toList();
-                var postReversed = post[index];
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: ListView.builder(
+                itemCount: result.post.length,
+                itemBuilder: (context, index) {
+                  var post = result.post.reversed.toList();
+                  var postReversed = post[index];
 
-                return forumCard(context, postReversed);
-              },
+                  return forumCard(context, postReversed);
+                },
+              ),
             );
           } else if (result.state == RequestState.error) {
             return Center(
@@ -69,6 +54,13 @@ class _ForumPageState extends State<ForumPage> {
             return Container();
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
+        onPressed: () {
+          Navigator.pushNamed(context, PostPage.routeName);
+        },
+        child: const Icon(Icons.create),
       ),
     );
   }

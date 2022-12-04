@@ -48,7 +48,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             width: 150,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: secondaryColor),
+                              border: Border.all(
+                                color: primaryColor,
+                                width: 3,
+                              ),
                               image: DecorationImage(
                                 image: NetworkImage(currentUser.imageUrl),
                                 fit: BoxFit.cover,
@@ -60,7 +63,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             width: 150,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: secondaryColor),
+                              border: Border.all(
+                                color: primaryColor,
+                                width: 3,
+                              ),
                               image: const DecorationImage(
                                 image: AssetImage('assets/blank_profile.jpg'),
                                 fit: BoxFit.cover,
@@ -87,7 +93,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 20,
                     ),
                     ElevatedButton(
-                      child: const Text('Change Profile Picture'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                      ),
                       onPressed: () async {
                         XFile file = await getImage();
                         final imagePath = await uploadProfilePicture(file);
@@ -109,9 +117,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
+                      child: const Text('Change Profile Picture'),
                     ),
                     ElevatedButton(
-                      child: const Text('Logout'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                      ),
                       onPressed: () async {
                         final navigator = Navigator.of(context);
 
@@ -120,6 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                         navigator.pushReplacementNamed(LoginPage.routeName);
                       },
+                      child: const Text('Logout'),
                     ),
                   ],
                 ),

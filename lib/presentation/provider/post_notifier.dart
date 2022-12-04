@@ -27,7 +27,14 @@ class PostNotifier extends ChangeNotifier {
   List<Post> _post = [];
   List<Post> get post => _post;
 
-  Post _postById = Post(createdAt: '', updatedAt: '', id: 0, name: '', description: '');
+  Post _postById = Post(
+    createdAt: '',
+    updatedAt: '',
+    id: 0,
+    name: '',
+    imageUrl: '',
+    description: '',
+  );
   Post get postByid => _postById;
 
   String _postMessage = '';
@@ -71,11 +78,12 @@ class PostNotifier extends ChangeNotifier {
     });
   }
 
-  Future<void> fetchCreatePost(String username, String description) async {
+  Future<void> fetchCreatePost(
+      String username, String description, String imageUrl) async {
     _state = RequestState.loading;
     notifyListeners();
 
-    final result = await createPost.execute(username, description);
+    final result = await createPost.execute(username, imageUrl, description);
 
     result.fold((failure) {
       _message = failure.message;

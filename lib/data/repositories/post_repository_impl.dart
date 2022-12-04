@@ -33,9 +33,10 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<Either<Failure, String>> createPost(String username, String description) async {
+  Future<Either<Failure, String>> createPost(
+      String username, String description, String imageUrl) async {
     try {
-      final result = await remoteDataSource.createPost(username, description);
+      final result = await remoteDataSource.createPost(username, description, imageUrl);
 
       return Right(result);
     } on ServerException {

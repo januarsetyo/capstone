@@ -7,12 +7,14 @@ class PostModel {
     required this.id,
     required this.name,
     required this.description,
+    required this.imageUrl,
   });
 
   final String createdAt;
   final String updatedAt;
   final int id;
   final String name;
+  final String imageUrl;
   final String description;
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
@@ -21,6 +23,7 @@ class PostModel {
         id: json["id"],
         name: json["name"],
         description: json["description"],
+        imageUrl: json["imageUrl"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +32,7 @@ class PostModel {
         "id": id,
         "name": name,
         "description": description,
+        "imageUrl": imageUrl,
       };
 
   Post toEntity() {
@@ -38,6 +42,7 @@ class PostModel {
       id: this.id,
       name: this.name,
       description: this.description,
+      imageUrl: this.imageUrl,
     );
   }
 }

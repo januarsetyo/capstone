@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 abstract class PostRemoteDataSource {
   Future<List<PostModel>> getPost();
   Future<PostModel> getPostById(int id);
-  Future<String> createPost(String username, String description);
+  Future<String> createPost(String username, String description, String imageUrl);
   Future<String> deletePostById(int id);
 }
 
@@ -41,7 +41,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
   }
 
   @override
-  Future<String> createPost(String username, String description) async {
+  Future<String> createPost(String username, String imageUrl, String description) async {
     final response = await client.post(
       Uri.parse('$baseUrl/post'),
       headers: {'Content-Type': 'application/json'},
@@ -49,6 +49,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
         <String, dynamic>{
           "name": username,
           "description": description,
+          "imageUrl": imageUrl,
         },
       ),
     );

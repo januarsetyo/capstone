@@ -6,6 +6,7 @@ class Post extends Equatable {
     required this.updatedAt,
     required this.id,
     required this.name,
+    required this.imageUrl,
     required this.description,
   });
 
@@ -14,7 +15,8 @@ class Post extends Equatable {
   int id;
   String name;
   String description;
+  String imageUrl;
 
   @override
-  List<Object> get props => [createdAt, updatedAt, id, name, description];
+  List<Object> get props => [createdAt, updatedAt, id, name, description, imageUrl];
 }

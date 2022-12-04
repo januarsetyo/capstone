@@ -27,10 +27,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<PostNotifier>(context, listen: false)
-          .fetchPostByid(widget.id);
-      Provider.of<CommentsNotifier>(context, listen: false)
-          .fetchComments(widget.id);
+      Provider.of<PostNotifier>(context, listen: false).fetchPostByid(widget.id);
+      Provider.of<CommentsNotifier>(context, listen: false).fetchComments(widget.id);
     });
   }
 
@@ -64,36 +62,30 @@ class _PostDetailPageState extends State<PostDetailPage> {
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     postDetailCard(context, result.postByid),
                                     const SizedBox(
                                       height: 10,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(horizontal: 5),
                                       child: Text(
                                         'Comments',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline5,
+                                        style: Theme.of(context).textTheme.headline5,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 10, 70),
+                                padding: const EdgeInsets.fromLTRB(10, 0, 10, 70),
                                 child: ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: resultComments.comments.length,
                                   itemBuilder: (context, index) {
-                                    var comment =
-                                        resultComments.comments[index];
+                                    var comment = resultComments.comments[index];
 
                                     return commentsCard(context, comment);
                                   },
@@ -116,8 +108,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                       color: Colors.white,
                                       child: TextField(
                                         controller: _commentsController,
-                                        textInputAction:
-                                            TextInputAction.newline,
+                                        textInputAction: TextInputAction.newline,
                                         keyboardType: TextInputType.multiline,
                                         minLines: 1,
                                         maxLines: 10,
@@ -159,22 +150,20 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                     );
 
                                     final snackBar = SnackBar(
-                                      content:
-                                          Text(resultComments.commentMessage),
+                                      content: Text(resultComments.commentMessage),
                                     );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-                                    Provider.of<CommentsNotifier>(context,
-                                            listen: false)
+                                    Provider.of<CommentsNotifier>(context, listen: false)
                                         .fetchComments(widget.id);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: primaryColor,
                                   ),
-                                  child: Text('SEND',
-                                      style:
-                                          Theme.of(context).textTheme.button),
+                                  child: Text(
+                                    'SEND',
+                                    style: Theme.of(context).textTheme.button,
+                                  ),
                                 ),
                               ],
                             ),

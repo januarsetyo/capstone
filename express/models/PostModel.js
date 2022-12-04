@@ -13,12 +13,17 @@ const Post = db.define(
       autoIncrement: true,
       allowNull: false,
     },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createdAt: {

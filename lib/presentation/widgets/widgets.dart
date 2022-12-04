@@ -24,12 +24,12 @@ Widget forumCard(BuildContext context, Post post) {
   return Consumer<PostNotifier>(
     builder: (context, result, child) {
       return Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: Card(
           color: Colors.lightBlue[100],
           child: InkWell(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(13, 0, 0, 13),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,9 +37,47 @@ Widget forumCard(BuildContext context, Post post) {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        post.name,
-                        style: Theme.of(context).textTheme.bodyText1,
+                      Row(
+                        children: [
+                          (post.imageUrl.isEmpty)
+                              ? Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: primaryColor,
+                                      width: 1,
+                                    ),
+                                    image: const DecorationImage(
+                                      image: AssetImage('assets/blank_profile.jpg'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: primaryColor,
+                                      width: 1,
+                                    ),
+                                    image: DecorationImage(
+                                      image: NetworkImage(post.imageUrl),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            post.name,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ],
                       ),
                       IconButton(
                         icon: const Icon(Icons.more_horiz),
@@ -52,8 +90,8 @@ Widget forumCard(BuildContext context, Post post) {
                                   'WARNING !',
                                   style: TextStyle(color: Colors.redAccent),
                                 ),
-                                content: const Text(
-                                    'Are you sure want to delete this post ?'),
+                                content:
+                                    const Text('Are you sure want to delete this post ?'),
                                 actions: [
                                   TextButton(
                                     child: const Text(
@@ -77,8 +115,7 @@ Widget forumCard(BuildContext context, Post post) {
                                                   Expanded(
                                                     child: Text(
                                                       'Can\'t delete other people post',
-                                                      textAlign:
-                                                          TextAlign.center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 ],
@@ -130,13 +167,20 @@ Widget forumCard(BuildContext context, Post post) {
                       )
                     ],
                   ),
-                  Text(post.createdAt,
-                      style: Theme.of(context).textTheme.overline),
+                  Text(
+                    post.createdAt,
+                    style: Theme.of(context).textTheme.overline,
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(post.description,
-                      style: Theme.of(context).textTheme.subtitle2),
+                  Text(
+                    post.description,
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                 ],
               ),
             ),
@@ -203,11 +247,17 @@ Widget commentsCard(BuildContext context, Comments comments) {
           const SizedBox(
             height: 5,
           ),
-          Text(comments.createdAt, style: Theme.of(context).textTheme.overline),
+          Text(
+            comments.createdAt,
+            style: Theme.of(context).textTheme.overline,
+          ),
           const SizedBox(
             height: 15,
           ),
-          Text(comments.comments, style: Theme.of(context).textTheme.subtitle2),
+          Text(
+            comments.comments,
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
         ],
       ),
     ),
