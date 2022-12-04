@@ -149,6 +149,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                       _commentsController.text,
                                     );
 
+                                    _commentsController.text = '';
+
                                     final snackBar = SnackBar(
                                       content: Text(resultComments.commentMessage),
                                     );

@@ -24,6 +24,7 @@ final myTextTheme = TextTheme(
     fontSize: 35,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
+    color: Colors.black,
   ),
   headline5: GoogleFonts.ubuntu(
     fontSize: 24,
@@ -63,7 +64,8 @@ final myTextTheme = TextTheme(
   caption: GoogleFonts.ubuntu(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
+    letterSpacing: 1.5,
+    color: primaryColor,
   ),
   overline: GoogleFonts.ubuntu(
     fontSize: 12,

@@ -88,7 +88,7 @@ Widget forumCard(BuildContext context, Post post) {
                               return AlertDialog(
                                 title: const Text(
                                   'WARNING !',
-                                  style: TextStyle(color: Colors.redAccent),
+                                  style: TextStyle(color: Colors.red),
                                 ),
                                 content:
                                     const Text('Are you sure want to delete this post ?'),
@@ -96,7 +96,7 @@ Widget forumCard(BuildContext context, Post post) {
                                   TextButton(
                                     child: const Text(
                                       'Yes',
-                                      style: TextStyle(color: Colors.redAccent),
+                                      style: TextStyle(color: Colors.red),
                                     ),
                                     onPressed: () async {
                                       if (post.name != currentUsername) {

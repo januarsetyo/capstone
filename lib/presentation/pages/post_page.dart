@@ -164,6 +164,8 @@ class _PostPageState extends State<PostPage> {
 
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             }
+
+                            _descriptionController.text = '';
                           } else {
                             _isDescriptionFilled = false;
                           }

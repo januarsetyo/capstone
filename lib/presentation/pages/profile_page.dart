@@ -32,10 +32,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<PreferencesNotifier>(
-        builder: (context, prefs, child) {
-          return Consumer<UserNotifier>(
+    return Consumer<PreferencesNotifier>(
+      builder: (context, prefs, child) {
+        return Scaffold(
+          body: Consumer<UserNotifier>(
             builder: (context, user, child) {
               final currentUser = user.userById;
               return Center(
@@ -97,58 +97,76 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundColor: primaryColor,
                       ),
                       onPressed: () async {
-                        XFile file = await getImage();
+                        final file = await getImage();
                         final imagePath = await uploadProfilePicture(file);
 
-                        await Provider.of<UserNotifier>(context, listen: false)
-                            .fetchCreateProfilePicture(
-                          _auth.currentUser!.uid,
-                          imagePath,
-                        );
+                        if (file != null && imagePath.isEmpty) {
+                          await Provider.of<UserNotifier>(context, listen: false)
+                              .fetchCreateProfilePicture(
+                            _auth.currentUser!.uid,
+                            imagePath,
+                          );
 
-                        Provider.of<UserNotifier>(context, listen: false)
-                            .fetchProfilePictureById(_auth.currentUser!.uid);
+                          Provider.of<UserNotifier>(context, listen: false)
+                              .fetchProfilePictureById(_auth.currentUser!.uid);
 
-                        final snackBar = SnackBar(
-                          content: Text(
-                            user.profilePictureMessage,
-                          ),
-                        );
+                          final snackBar = SnackBar(
+                            content: Text(
+                              user.profilePictureMessage,
+                            ),
+                          );
 
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          const snackBar = SnackBar(
+                            content: Text(
+                              'Failed To Change Profile Picture !',
+                            ),
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       },
                       child: const Text('Change Profile Picture'),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                      ),
-                      onPressed: () async {
-                        final navigator = Navigator.of(context);
-
-                        await _auth.signOut();
-                        prefs.setIsLogin(false);
-
-                        navigator.pushReplacementNamed(LoginPage.routeName);
-                      },
-                      child: const Text('Logout'),
                     ),
                   ],
                 ),
               );
             },
-          );
-        },
-      ),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
+            elevation: 0,
+            onPressed: () async {
+              final navigator = Navigator.of(context);
+
+              await _auth.signOut();
+
+              prefs.setIsLogin(false);
+
+              navigator.pushReplacementNamed(LoginPage.routeName);
+            },
+            child: const Icon(
+              Icons.logout,
+              color: primaryColor,
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Future<String> uploadProfilePicture(XFile imageFile) async {
-    String fileName = path.basename(imageFile.path);
-    Reference ref = FirebaseStorage.instance.ref().child(fileName);
-    UploadTask uploadTask = ref.putFile(i.File(imageFile.path));
+  Future<String> uploadProfilePicture(imageFile) async {
+    if (imageFile is XFile) {
+      String fileName = path.basename(imageFile.path);
+      Reference ref = FirebaseStorage.instance.ref().child(fileName);
+      UploadTask uploadTask = ref.putFile(i.File(imageFile.path));
 
-    return uploadTask.then((res) => res.ref.getDownloadURL());
+      return uploadTask.then((res) => res.ref.getDownloadURL());
+    } else {
+      return '';
+    }
   }
 
   Future getImage() async {

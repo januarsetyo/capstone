@@ -42,19 +42,16 @@ class _LoginPageState extends State<LoginPage> {
                         color: secondaryColor,
                       ))
                     : Container(),
-                const Text(
+                Text(
                   'Hello Again!',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  style: Theme.of(context).textTheme.headline4,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8.0),
-                const Hero(
-                  tag: 'welcome',
-                  child: Text(
-                    'Welcome back, you,ve been missed',
-                    style: TextStyle(fontSize: 20),
-                    textAlign: TextAlign.center,
-                  ),
+                Text(
+                  'Welcome back, you\'ve been missed',
+                  style: Theme.of(context).textTheme.headline5,
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 25.0),
                 Hero(
@@ -75,6 +72,12 @@ class _LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: primaryColor,
+                        width: 2,
+                      ),
+                    ),
                     hintText: 'Email',
                   ),
                 ),
@@ -84,10 +87,16 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: _obscureText,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: primaryColor,
+                        width: 2,
+                      ),
+                    ),
                     suffixIcon: IconButton(
-                      icon: Icon(_obscureText
-                          ? Icons.visibility
-                          : Icons.visibility_off),
+                      icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
                       onPressed: () {
                         setState(() {
                           _obscureText = !_obscureText;
@@ -99,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 20.0),
                 MaterialButton(
-                  color: Theme.of(context).primaryColor,
+                  color: primaryColor,
                   textTheme: ButtonTextTheme.primary,
                   height: 40,
                   shape: RoundedRectangleBorder(
@@ -116,7 +125,9 @@ class _LoginPageState extends State<LoginPage> {
                       final password = _passwordController.text;
 
                       await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
+                        email: email,
+                        password: password,
+                      );
 
                       value.setIsLogin(true);
 
@@ -133,9 +144,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('Login'),
                 ),
                 TextButton(
-                  child: const Text('Want to try the app now ? Signup here'),
-                  onPressed: () =>
-                      Navigator.pushNamed(context, SignupPage.routeName),
+                  child: Text(
+                    'Don\'t have account yet ? Signup Here',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    SignupPage.routeName,
+                  ),
                 ),
               ],
             ),

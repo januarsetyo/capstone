@@ -1,3 +1,4 @@
+import 'package:capstone/styles/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -30,13 +31,10 @@ class _SignupPageState extends State<SignupPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _isLoading ? const Center(child: CircularProgressIndicator()) : Container(),
-            const Hero(
-              tag: 'Sign Up',
-              child: Text(
-                'Sign Up',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                textAlign: TextAlign.center,
-              ),
+            Text(
+              'Sign Up',
+              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12.0),
             Hero(
@@ -61,6 +59,12 @@ class _SignupPageState extends State<SignupPage> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: primaryColor,
+                    width: 2,
+                  ),
+                ),
                 border: OutlineInputBorder(),
                 hintText: 'Email',
               ),
@@ -71,8 +75,16 @@ class _SignupPageState extends State<SignupPage> {
               obscureText: _obscureText,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: primaryColor,
+                    width: 2,
+                  ),
+                ),
                 suffixIcon: IconButton(
-                  icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                  ),
                   onPressed: () {
                     setState(() {
                       _obscureText = !_obscureText;
@@ -84,7 +96,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             const SizedBox(height: 24.0),
             MaterialButton(
-              color: Theme.of(context).primaryColor,
+              color: primaryColor,
               textTheme: ButtonTextTheme.primary,
               height: 40,
               shape: RoundedRectangleBorder(
@@ -101,7 +113,9 @@ class _SignupPageState extends State<SignupPage> {
                   final password = _passwordController.text;
 
                   await _auth.createUserWithEmailAndPassword(
-                      email: email, password: password);
+                    email: email,
+                    password: password,
+                  );
 
                   navigator.pop();
                 } catch (err) {
@@ -116,7 +130,10 @@ class _SignupPageState extends State<SignupPage> {
               child: const Text('Signup'),
             ),
             TextButton(
-              child: const Text('Already have an account ? Login'),
+              child: Text(
+                'Already have an account ? Login Here',
+                style: Theme.of(context).textTheme.caption,
+              ),
               onPressed: () => Navigator.pop(context),
             ),
           ],

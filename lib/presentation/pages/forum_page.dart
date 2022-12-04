@@ -34,18 +34,24 @@ class _ForumPageState extends State<ForumPage> {
               ),
             );
           } else if (result.state == RequestState.loaded) {
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: result.post.length,
-                itemBuilder: (context, index) {
-                  var post = result.post.reversed.toList();
-                  var postReversed = post[index];
+            if (result.post.isEmpty) {
+              return const Center(
+                child: Text('no forum yet, try to create a forum'),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: ListView.builder(
+                  itemCount: result.post.length,
+                  itemBuilder: (context, index) {
+                    var post = result.post.reversed.toList();
+                    var postReversed = post[index];
 
-                  return forumCard(context, postReversed);
-                },
-              ),
-            );
+                    return forumCard(context, postReversed);
+                  },
+                ),
+              );
+            }
           } else if (result.state == RequestState.error) {
             return Center(
               child: Text(result.message),

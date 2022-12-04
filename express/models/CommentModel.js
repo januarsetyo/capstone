@@ -23,14 +23,14 @@ const Comments = db.define(
       type: DataTypes.DATE,
       allowNull: false,
       get() {
-        return moment(this.getDataValue('createdAt')).format('h:mm:ss DD/MM/YYYY');
+        return moment(this.getDataValue('createdAt')).fromNow();
       },
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
       get() {
-        return moment(this.getDataValue('updatedAt')).format('h:mm:ss DD/MM/YYYY');
+        return moment(this.getDataValue('updatedAt')).fromNow();
       },
     },
   },
