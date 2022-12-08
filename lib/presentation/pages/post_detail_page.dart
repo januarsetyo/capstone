@@ -33,6 +33,12 @@ class _PostDetailPageState extends State<PostDetailPage> {
   }
 
   @override
+  void dispose() {
+    _commentsController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
