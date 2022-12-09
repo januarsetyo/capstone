@@ -5,7 +5,7 @@ import 'package:capstone/utils/exception.dart';
 import 'package:capstone/utils/failure.dart';
 import 'package:dartz/dartz.dart';
 
-class ArticleRepositoryImpl implements ArticleRespository {
+class ArticleRepositoryImpl implements ArticleRepository {
   final ArticleRemoteDataSource remoteDataSource;
 
   ArticleRepositoryImpl({required this.remoteDataSource});

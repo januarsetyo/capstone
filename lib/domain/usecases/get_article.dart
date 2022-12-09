@@ -4,7 +4,7 @@ import 'package:capstone/utils/failure.dart';
 import 'package:dartz/dartz.dart';
 
 class GetArticle {
-  final ArticleRespository repository;
+  final ArticleRepository repository;
 
   GetArticle(this.repository);
 

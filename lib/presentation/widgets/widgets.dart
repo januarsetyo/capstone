@@ -1,4 +1,3 @@
-import 'package:capstone/domain/entities/article.dart';
 import 'package:capstone/domain/entities/comments.dart';
 import 'package:capstone/domain/entities/post.dart';
 import 'package:capstone/presentation/pages/post_detail_page.dart';
@@ -7,13 +6,6 @@ import 'package:capstone/styles/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-Widget buildArticleListTile(BuildContext context, Article article) {
-  return ListTile(
-    title: Text(article.title),
-    subtitle: Text(article.description),
-  );
-}
 
 Widget forumCard(BuildContext context, Post post) {
   final auth = FirebaseAuth.instance;
@@ -262,4 +254,56 @@ Widget commentsCard(BuildContext context, Comments comments) {
       ),
     ),
   );
+}
+
+Card buildShortAppBar(BuildContext context) {
+  return Card(
+    margin: const EdgeInsets.all(0),
+    shape: const BeveledRectangleBorder(
+      borderRadius: BorderRadius.only(
+        bottomRight: Radius.circular(16),
+      ),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: primaryColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: Text(
+            'Curhatin',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class CustomScaffold extends StatelessWidget {
+  final Widget body;
+
+  const CustomScaffold({Key? key, required this.body}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            body,
+            buildShortAppBar(context),
+          ],
+        ),
+      ),
+    );
+  }
 }

@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:capstone/data/models/article_model.dart';
-import 'package:capstone/data/models/article_response.dart';
-import 'package:capstone/utils/exception.dart';
 import 'package:capstone/utils/constants.dart';
-
+import 'package:capstone/utils/exception.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ArticleRemoteDataSource {
@@ -18,10 +16,11 @@ class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
 
   @override
   Future<List<ArticleModel>> getArticle() async {
-    final response = await client.get(Uri.parse('$baseUrl/articles'));
+    final response = await client.get(Uri.parse('$baseUrl/article'));
 
     if (response.statusCode == 200) {
-      return ArticleResponse.fromJson(json.decode(response.body)).articleList;
+      return List<ArticleModel>.from(
+          json.decode(response.body).map((x) => ArticleModel.fromJson(x)));
     } else {
       throw ServerException();
     }

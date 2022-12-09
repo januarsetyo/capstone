@@ -1,5 +1,6 @@
 import 'package:capstone/data/datasources/preferences_helper.dart';
 import 'package:capstone/firebase_options.dart';
+import 'package:capstone/presentation/pages/article_webview_page.dart';
 import 'package:capstone/presentation/pages/home_page.dart';
 import 'package:capstone/presentation/pages/login_page.dart';
 import 'package:capstone/presentation/pages/post_detail_page.dart';
@@ -9,12 +10,12 @@ import 'package:capstone/presentation/provider/preferences_notifier.dart';
 import 'package:capstone/presentation/provider/post_notifier.dart';
 import 'package:capstone/presentation/provider/comments_notifier.dart';
 import 'package:capstone/presentation/provider/user_notifier.dart';
+import 'package:capstone/presentation/provider/article_notifier.dart';
 import 'package:capstone/styles/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:capstone/presentation/provider/article_notifier.dart';
 import 'package:capstone/injection.dart' as di;
 
 Future<void> main() async {
@@ -60,9 +61,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<ArticleNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<PostNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -70,6 +68,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<UserNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<ArticleNotifier>(),
         ),
       ],
       child: Consumer<PreferencesNotifier>(
@@ -85,6 +86,9 @@ class MyApp extends StatelessWidget {
               PostPage.routeName: (context) => const PostPage(),
               PostDetailPage.routeName: (context) => PostDetailPage(
                     ModalRoute.of(context)?.settings.arguments as int,
+                  ),
+              ArticleWebViewPage.routeName: (context) => ArticleWebViewPage(
+                    ModalRoute.of(context)?.settings.arguments as String,
                   ),
             },
           );

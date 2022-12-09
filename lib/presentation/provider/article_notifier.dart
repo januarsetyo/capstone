@@ -4,7 +4,7 @@ import 'package:capstone/utils/enum_state.dart';
 import 'package:flutter/widgets.dart';
 
 class ArticleNotifier extends ChangeNotifier {
-  final GetArticle getArticle;
+  GetArticle getArticle;
 
   ArticleNotifier(this.getArticle) {
     fetchArticle();
@@ -25,13 +25,16 @@ class ArticleNotifier extends ChangeNotifier {
 
     final result = await getArticle.execute();
 
-    result.fold((failure) {
-      _message = failure.message;
-      _state = RequestState.error;
-    }, (data) {
-      _article = data;
-      _state = RequestState.loaded;
-      notifyListeners();
-    });
+    result.fold(
+      (failure) {
+        _message = failure.message;
+        _state = RequestState.error;
+      },
+      (data) {
+        _article = data;
+        _state = RequestState.loaded;
+        notifyListeners();
+      },
+    );
   }
 }

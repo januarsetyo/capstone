@@ -1,35 +1,43 @@
 import 'package:capstone/domain/entities/article.dart';
-import 'package:equatable/equatable.dart';
 
-class ArticleModel extends Equatable {
+class ArticleModel {
   ArticleModel({
+    required this.createdAt,
+    required this.updatedAt,
+    required this.id,
     required this.title,
-    required this.description,
+    required this.url,
   });
 
+  final String createdAt;
+  final String updatedAt;
+  final int id;
   final String title;
-  final String description;
+  final String url;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
+        createdAt: json["createdAt"],
+        updatedAt: json["updatedAt"],
+        id: json["id"],
         title: json["title"],
-        description: json["description"],
+        url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+        "id": id,
         "title": title,
-        "description": description,
+        "url": url,
       };
 
   Article toEntity() {
     return Article(
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      id: this.id,
       title: this.title,
-      description: this.description,
+      url: this.url,
     );
   }
-
-  @override
-  List<Object> get props => [
-        title,
-        description,
-      ];
 }

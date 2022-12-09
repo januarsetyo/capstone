@@ -32,11 +32,6 @@ final locator = GetIt.instance;
 void init() {
   // provider
   locator.registerFactory(
-    () => ArticleNotifier(
-      locator(),
-    ),
-  );
-  locator.registerFactory(
     () => PostNotifier(
       locator(),
       locator(),
@@ -57,9 +52,13 @@ void init() {
       locator(),
     ),
   );
+  locator.registerFactory(
+    () => ArticleNotifier(
+      locator(),
+    ),
+  );
 
   // usecases
-  locator.registerLazySingleton(() => GetArticle(locator()));
   locator.registerLazySingleton(() => GetPost(locator()));
   locator.registerLazySingleton(() => GetPostById(locator()));
   locator.registerLazySingleton(() => CreatePost(locator()));
@@ -69,13 +68,9 @@ void init() {
   locator.registerLazySingleton(() => CreateProfilePicture(locator()));
   locator.registerLazySingleton(() => GetProfilePictureById(locator()));
   locator.registerLazySingleton(() => DeleteProfilePictureById(locator()));
+  locator.registerLazySingleton(() => GetArticle(locator()));
 
   // repository
-  locator.registerLazySingleton<ArticleRespository>(
-    () => ArticleRepositoryImpl(
-      remoteDataSource: locator(),
-    ),
-  );
   locator.registerLazySingleton<PostRepository>(
     () => PostRepositoryImpl(
       remoteDataSource: locator(),
@@ -91,13 +86,13 @@ void init() {
       remoteDataSource: locator(),
     ),
   );
-
-  // data sources
-  locator.registerLazySingleton<ArticleRemoteDataSource>(
-    () => ArticleRemoteDataSourceImpl(
-      client: locator(),
+  locator.registerLazySingleton<ArticleRepository>(
+    () => ArticleRepositoryImpl(
+      remoteDataSource: locator(),
     ),
   );
+
+  // data sources
   locator.registerLazySingleton<PostRemoteDataSource>(
     () => PostRemoteDataSourceImpl(
       client: locator(),
@@ -110,6 +105,11 @@ void init() {
   );
   locator.registerLazySingleton<UserRemoteDataSource>(
     () => UserRemoteDataSourceImpl(
+      client: locator(),
+    ),
+  );
+  locator.registerLazySingleton<ArticleRemoteDataSource>(
+    () => ArticleRemoteDataSourceImpl(
       client: locator(),
     ),
   );

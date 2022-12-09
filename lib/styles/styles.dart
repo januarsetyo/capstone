@@ -34,6 +34,7 @@ final myTextTheme = TextTheme(
     fontSize: 20,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
+    color: primaryColor,
   ),
   subtitle1: GoogleFonts.ubuntu(
     fontSize: 16,
