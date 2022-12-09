@@ -75,7 +75,6 @@ class MyApp extends StatelessWidget {
       child: Consumer<PreferencesNotifier>(
         builder: (context, value, child) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false,
             title: 'Capstone Project',
             theme: ThemeData(textTheme: myTextTheme),
             initialRoute: pageRouteName,

@@ -1,159 +1,163 @@
+import 'package:capstone/presentation/pages/home_page.dart';
+import 'package:capstone/presentation/pages/signup_page.dart';
+import 'package:capstone/presentation/provider/preferences_notifier.dart';
+import 'package:capstone/styles/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'signup_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
-  const LoginPage({super.key});
+
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  FocusNode? _focusNode;
-  bool _loggingIn = false;
-  TextEditingController? _passwordController;
-  TextEditingController? _usernameController;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool _obscureText = true;
+  bool _isLoading = false;
+
+  final _auth = FirebaseAuth.instance;
 
   @override
-  void initState() {
-    super.initState();
-    _focusNode = FocusNode();
-    _passwordController = TextEditingController(text: 'Qawsed1-');
-    _usernameController = TextEditingController(text: '');
-  }
-
-  @override
-  void dispose() {
-    _focusNode?.dispose();
-    _passwordController?.dispose();
-    _usernameController?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-      title: const Text('Login'),
-    ),
-    body: SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.only(top: 80, left: 24, right: 24),
-        child: Column(
-          children: [
-            TextField(
-              autocorrect: false,
-              autofillHints: _loggingIn ? null : [AutofillHints.email],
-              autofocus: true,
-              controller: _usernameController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
+  Widget build(BuildContext context) {
+    return Consumer<PreferencesNotifier>(
+      builder: (context, value, child) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: secondaryColor,
+                      ))
+                    : Container(),
+                Text(
+                  'Hello Again!',
+                  style: Theme.of(context).textTheme.headline4,
+                  textAlign: TextAlign.center,
                 ),
-                labelText: 'Email',
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.cancel),
-                  onPressed: () => _usernameController?.clear(),
+                const SizedBox(height: 8.0),
+                Text(
+                  'Welcome back, you\'ve been missed',
+                  style: Theme.of(context).textTheme.headline5,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              keyboardType: TextInputType.emailAddress,
-              onEditingComplete: () {
-                _focusNode?.requestFocus();
-              },
-              readOnly: _loggingIn,
-              textCapitalization: TextCapitalization.none,
-              textInputAction: TextInputAction.next,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              child: TextField(
-                autocorrect: false,
-                autofillHints: _loggingIn ? null : [AutofillHints.password],
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
+                const SizedBox(height: 25.0),
+                Hero(
+                    tag: 'Image',
+                    child: Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(35),
+                        child: Image.asset(
+                          'assets/icon.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                      ),
+                    )),
+                const SizedBox(height: 10.0),
+                TextField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: primaryColor,
+                        width: 2,
+                      ),
                     ),
-                  ),
-                  labelText: 'Password',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.cancel),
-                    onPressed: () => _passwordController?.clear(),
+                    hintText: 'Email',
                   ),
                 ),
-                focusNode: _focusNode,
-                keyboardType: TextInputType.emailAddress,
-                obscureText: true,
-                onEditingComplete: _login,
-                textCapitalization: TextCapitalization.none,
-                textInputAction: TextInputAction.done,
-              ),
-            ),
-            TextButton(
-              onPressed: _loggingIn ? null : _login,
-              child: const Text('Login'),
-            ),
-            TextButton(
-              onPressed: _loggingIn
-                  ? null
-                  : () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const SignupPage(),
+                const SizedBox(height: 8.0),
+                TextField(
+                  controller: _passwordController,
+                  obscureText: _obscureText,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: primaryColor,
+                        width: 2,
+                      ),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                    ),
+                    hintText: 'Password',
                   ),
-                );
-              },
-              child: const Text('Register'),
+                ),
+                const SizedBox(height: 20.0),
+                MaterialButton(
+                  color: primaryColor,
+                  textTheme: ButtonTextTheme.primary,
+                  height: 40,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      _isLoading = true;
+                    });
+
+                    try {
+                      final navigator = Navigator.of(context);
+                      final email = _emailController.text;
+                      final password = _passwordController.text;
+
+                      await _auth.signInWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+
+                      value.setIsLogin(true);
+
+                      navigator.pushReplacementNamed(HomePage.routeName);
+                    } catch (err) {
+                      final snackBar = SnackBar(content: Text(err.toString()));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    } finally {
+                      setState(() {
+                        _isLoading = false;
+                      });
+                    }
+                  },
+                  child: const Text('Login'),
+                ),
+                TextButton(
+                  child: Text(
+                    'Don\'t have account yet ? Signup Here',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    SignupPage.routeName,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ),
-  );
-
-  void _login() async {
-    FocusScope.of(context).unfocus();
-
-    setState(() {
-      _loggingIn = true;
-    });
-
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _usernameController!.text,
-        password: _passwordController!.text,
-      );
-      if (!mounted) return;
-      Navigator.of(context).pop();
-    } catch (e) {
-      setState(() {
-        _loggingIn = false;
-      });
-
-      await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-          content: Text(
-            e.toString(),
           ),
-          title: const Text('Error'),
-        ),
-      );
-    }
+        );
+      },
+    );
   }
 }
