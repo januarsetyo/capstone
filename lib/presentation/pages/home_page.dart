@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _listWidgets = [
     const ForumPage(),
-    const LiveChatPage(),
+    LiveChatPage(email: "",),
     const ArticlePage(),
     ProfilePage(),
   ];
