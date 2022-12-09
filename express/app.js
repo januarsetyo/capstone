@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const hostname = 'localhost';
 const port = 3000;
+const hostname = 'localhost';
+const { articles } = require('./articles');
 const { postRouter } = require('./routes/PostRoute');
 const { commentRouter } = require('./routes/CommentRoute');
 const { userRouter } = require('./routes/UserRoute');
@@ -17,5 +18,5 @@ app.use('/user', userRouter);
 app.use('/article', articleRouter);
 
 app.listen(port, hostname, () => {
-  console.log(`Server is running on ${hostname}:${port}`);
+  console.log(`Server is running on http://${hostname}:${port}`);
 });
