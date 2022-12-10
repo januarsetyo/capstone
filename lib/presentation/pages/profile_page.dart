@@ -100,7 +100,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         final file = await getImage();
                         final imagePath = await uploadProfilePicture(file);
 
-                        if (file != null && imagePath.isEmpty) {
+                        debugPrint(imagePath);
+
+                        if (file != null && imagePath.isNotEmpty) {
                           await Provider.of<UserNotifier>(context, listen: false)
                               .fetchCreateProfilePicture(
                             _auth.currentUser!.uid,

@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const port = 3000;
 const hostname = 'localhost';
-const { articles } = require('./articles');
 const { postRouter } = require('./routes/PostRoute');
 const { commentRouter } = require('./routes/CommentRoute');
 const { userRouter } = require('./routes/UserRoute');
